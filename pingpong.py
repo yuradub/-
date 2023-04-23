@@ -57,9 +57,9 @@ while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
-    Racket1.reset()
-    Racket2.reset()
-    Ball.reset()
+        Racket1.reset()
+        Racket2.reset()
+        Ball.reset()
 
-display.update()
-clock.tick(FPS)
+    display.update()
+    clock.tick(FPS)
