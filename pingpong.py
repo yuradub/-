@@ -16,15 +16,15 @@ class GameSprite(sprite.Sprite):
 class Player(GameSprite):
     def update_r(self):
         keys_pressed = key.get_pressed()
-        if keys_pressed[K_w] and self.rect.y > 5:
-            self.rect.y -= self.speed
-        if keys_pressed[K_s] and self.rect.y < win_width - 80:
-            self.rect.y += self.speed
-    def update_l(self):
-        keys_pressed = key.get_pressed()
         if keys_pressed[K_o] and self.rect.y > 5:
             self.rect.y -= self.speed
         if keys_pressed[K_l] and self.rect.y < win_width - 80:
+            self.rect.y += self.speed
+    def update_l(self):
+        keys_pressed = key.get_pressed()
+        if keys_pressed[K_w] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys_pressed[K_s] and self.rect.y < win_width - 80:
             self.rect.y += self.speed
 
 class Ball(GameSprite):
@@ -60,7 +60,7 @@ speed_x = 3
 speed_y = 3
 all_sprites = sprite.Group()
 Racket1 = Player('644504262f3c1.png', 30, 200, 4, 50, 150)
-Racket2 = Player('644504262f3c1.png', 520, 200, 4, 50, 150)
+Racket2 = Player('644504262f3c1.png', 580, 200, 4, 50, 150)
 ball = Ball('6445042b4ac9a.png', 200, 200, 4, 50, 50)
 all_sprites.add(Racket1, Racket2, ball)
 
@@ -78,12 +78,18 @@ while game:
 
         if sprite.collide_rect(ball, Racket1) or sprite.collide_rect(ball, Racket2):
             speed_x *= -1
-            speed_y *= 1
+            speed_y *= -1
 
     # Проверяем выход мяча за границы экрана
         if ball.rect.y > win_height-50 or ball.rect.y < 0:
             speed_y *= -1
-            speed_x *= -1
+
+        if ball.rect.x < 0:
+            window.blit(lose1, (200, 200))
+            finish = True
+        if ball.rect.y < 0:
+            window.blit(lose1, (200, 200))
+            finish = True
 
         Racket1.reset()
         Racket2.reset()
