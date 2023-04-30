@@ -80,13 +80,17 @@ while game:
             speed_x *= -1
             speed_y *= 1
 
-    # Проверяем выход мяча за границы экрана
-        if ball.rect.y > win_height-50 or ball.rect.y < 0:
-            speed_y *= -1
-
+        #якщо м'яч відлетів далі ракетки, виводимо умову програшу для першого гравця
         if ball.rect.x < 0:
-            window.blit(lose1, (200, 200))
             finish = True
+            window.blit(lose1, (200, 200))
+            game_over = True
+    
+        #якщо м'яч полетів далі ракетки, виводимо умову програшу другого гравця
+        if ball.rect.x > win_width:
+            finish = True
+            window.blit(lose2, (200, 200))
+            game_over = True
 
 
         Racket1.reset()
