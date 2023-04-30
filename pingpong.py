@@ -86,6 +86,9 @@ while game:
         if ball.rect.x < 0:
             finish = True
             window.blit(lose1, (200, 200))
+        if ball.rect.x > 650:
+            finish = True
+            window.blit(lose2, (200, 200))
 
         Racket1.reset()
         Racket2.reset()
@@ -93,4 +96,5 @@ while game:
         all_sprites.draw(window)
     display.update()
     clock.tick(FPS)
+      
       
